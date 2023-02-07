@@ -223,7 +223,7 @@
 
 成功升级 BE 节点后，您可以继续升级 FE 节点。
 
-> 注意：升级 FE 遵循**先升级 Observer，再升级 Follower，最后升级 Leader** 的顺序。
+> 注意：升级 FE 遵循**先升级 Observer，再升级 Follower，最后升级 Leader** 的顺序。升级前建议备份 FE 节点的元数据。
 
 1. 修改 FE 源码（可选，如果您无需从 Apache Doris 0.13.15 版本升级，可以跳过此步骤）。
 
