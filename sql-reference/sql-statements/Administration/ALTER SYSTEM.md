@@ -39,6 +39,7 @@
     | host:edit_log_port | 是       | <ul><li>`host`：FE 机器的主机名或 IP 地址。如果机器存在多个 IP 地址，则该参数取值应为 `priority_networks` 配置项下设定的唯一通信 IP 地址。</li><li>`edit_log_port`：FE 上的 BDBJE 通信端口，默认为 `9010`。</li></ul> |
 
 - 创建 image。
+
     ```SQL
     ALTER SYSTEM CREATE IMAGE
     ```
