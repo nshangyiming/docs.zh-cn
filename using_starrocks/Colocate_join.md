@@ -14,9 +14,9 @@ Colocate Join 支持等值 Join。
 
 在建表时，您需要在 PROPERTIES 中指定属性 `"colocate_with" = "group_name"` 以创建一个 Colocate Join 表，并且指定其归属于特定的 Colocation Group。
 
-> 注意
+> 说明
 >
-> StarRocks 从 2.5.4 开始支持了对多个 Database 中的表执行 Colocate Join 操作，用户只需要在建表时指定相同的 `colocate_with` 属性即可。
+> 自 2.5.4 起，支持了对不同 Database 中的表执行 Colocate Join，您只需要在建表时指定相同的 `colocate_with` 属性即可。
 
 示例：
 
@@ -31,7 +31,7 @@ PROPERTIES(
 
 如果指定的 CG 不存在，StarRocks 会自动创建一个只包含当前表的 CG，并指定当前表为该 CG 的 Parent Table。如果 CG 已存在，StarRocks 会检查当前表是否满足 CGS。如果满足，StarRocks 会创建该表，并将该表加入 Group。同时，StarRocks 会根据已存在的 Group 中的数据分布规则为当前表创建分片和副本。
 
-Group 归属于一个 Database，即使用户在不同 Database 建表时通过指定相同的 `colocate_with` 属性来保证多个 Database 的表互相 colocate，每个 Database 仍然会包含单独的 Group，可以通过执行 `show proc "/colocation_group"` 确认。Group 名在一个 Database 内唯一，在内部存储中，Group 的全名为 `dbId_groupName`，但用户只感知 `groupName`。
+Group 归属于一个 Database，即使您在不同 Database 建表时通过指定相同的 `colocate_with` 属性来保证多个 Database 的表互相 colocate，每个 Database 仍然会包含单独的 Group，可以通过执行 `show proc "/colocation_group"` 确认。Group 名在一个 Database 内唯一，在内部存储中，Group 的全名为 `dbId_groupName`，但您只感知 `groupName`。
 
 分桶键哈希值，对分桶数取模得到桶的序号（Bucket Seq）。假设一个表的分桶数为 8，则共有 \[0, 1, 2, 3, 4, 5, 6, 7\] 8 个分桶（Bucket)，每个分桶内会有一个或多个子表（Tablet)，子表数量取决于表的分区（Partition）数量：为单分区表时，一个分桶内仅有一个子表。如果是多分区表，则会有多个子表。
 
