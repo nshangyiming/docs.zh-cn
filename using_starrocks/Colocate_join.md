@@ -34,7 +34,7 @@ PROPERTIES(
 一个 Group 归属于一个 Database。Group 名在一个 Database 内唯一，在内部存储中，Group 的全名为 `dbId_groupName`，但您只感知 `groupName`。
 > 说明
 >
-> 如果多个表属于不同 Database，并且建表语句中 `colocate_with` 属性里指定了相同的 Colocation Group，以保证这些表互相 colocate，则该 Colocation Group 不会仅仅存在一个 Database 中，每个 Database 都会包含该 Colocation Group，您可以通过执行 `show proc "/colocation_group"` 查看每个数据库包含的 Colocation Group 信息。
+> 如果多个表属于不同 Database，并且这些表的建表语句中 `colocate_with` 属性里使用了相同的 Colocation Group，以保证这些表互相 colocate，则该 Colocation Group 不会仅仅存在一个 Database 中，每个 Database 都会包含该 Colocation Group，您可以通过执行 `show proc "/colocation_group"` 查看每个数据库包含的 Colocation Group 信息。
 
 分桶键哈希值，对分桶数取模得到桶的序号（Bucket Seq）。假设一个表的分桶数为 8，则共有 \[0, 1, 2, 3, 4, 5, 6, 7\] 8 个分桶（Bucket)，每个分桶内会有一个或多个子表（Tablet)，子表数量取决于表的分区（Partition）数量：为单分区表时，一个分桶内仅有一个子表。如果是多分区表，则会有多个子表。
 
