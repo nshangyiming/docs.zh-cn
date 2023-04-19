@@ -16,7 +16,7 @@ Colocate Join 支持等值 Join。
 
 > 注意
 >
-> StarRocks 从 2.5.4 开始支持了对多个 Database 中的表执行 Colocate Join 操作，用户只需要在建表时指定相同的 `colodate_with` 属性即可。
+> StarRocks 从 2.5.4 开始支持了对多个 Database 中的表执行 Colocate Join 操作，用户只需要在建表时指定相同的 `colocate_with` 属性即可。
 
 示例：
 
