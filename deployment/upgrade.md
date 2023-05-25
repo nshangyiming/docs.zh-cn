@@ -79,9 +79,6 @@ ADMIN SET FRONTEND CONFIG ("disable_colocate_balance"="false");
    SET GLOBAL batch_size = 4096;
    ```
 
-#### 回滚之后再次升级
-如果您从 2.5 升级到 3.0 之后，进行了回滚，然后再次升级到 3.0，为了避免部分 FE Follower 节点元数据升级失败，您需要执行 `alter system create image` 在 FE Leader 上创建新的元数据 image，并等待该 image 推送到所有 FE Follower 完成，可以通过查看 Leader 的 fe.log 确认 image 推送完成，log 形式：`push image.* from subdir [] to other nodes. totally xx nodes, push successed xx nodes`。
-
 ### 升级正确性测试
 
 在升级生产集群中的所有节点之前，强烈建议您在单个 BE 和 FE 节点上进行升级正确性测试，以查看升级是否影响您当前的数据。
@@ -276,3 +273,12 @@ ADMIN SET FRONTEND CONFIG ("disable_colocate_balance"="false");
    ```
 
 5. 重复以上步骤升级其他 Follower FE 节点，最后升级 Leader FE 节点。
+
+  > **注意**
+  >
+  > 如果您从 v2.5 升级至 v3.0 之后，进行了回滚，然后再次升级至 v3.0，为了避免部分 Follower FE 节点元数据升级失败，则必须在升级完成后执行以下步骤：
+  >
+  > 1. 执行 [ALTER SYSTEM CREATE IMAGE](../sql-reference/sql-statements/Administration/ALTER%20SYSTEM.md) 创建新的元数据快照文件。
+  > 2. 等待元数据快照文件同步至其他 FE 节点。
+  >
+  > 您可以通过查看 Leader FE 节点的日志文件 **fe.log** 确认元数据快照文件是否推送完成。如果日志打印以下内容，则说明快照文件推送完成："push image.* from subdir [] to other nodes. totally xx nodes, push successed xx nodes"。
