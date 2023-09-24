@@ -231,4 +231,4 @@ StarRocks 支持的 BITMAP、STRING、ARRAY、Column 之间的类型转化关系
 
 ## Keywords
 
-explode，爆裂函数
+explode，爆炸函数
